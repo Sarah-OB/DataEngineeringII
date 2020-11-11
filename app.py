@@ -9,8 +9,7 @@ import string
 app = Flask(__name__)
 
 model = pickle.load(
-    open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl',
-         'rb'))
+    open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl','rb'))
 
 
 def remove_noise(tweet_tokens, stop_words=()):
