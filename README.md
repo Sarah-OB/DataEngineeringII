@@ -17,5 +17,6 @@ To use our application, you need to do :
 #### Enjoy the app !
 
 PS1 : Don't forget to stop the application (with the command "docker-compose down") when you are done with it ;) 
+
 PS2 : Want to play again ? Just do the 2-3-4-5 steps !
 
