@@ -5,6 +5,7 @@ from nltk.tag import pos_tag
 from nltk.stem.wordnet import WordNetLemmatizer
 import re
 import string
+import nltk
 
 nltk.download('punkt')
 nltk.download('wordnet')
