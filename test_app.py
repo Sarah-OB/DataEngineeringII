@@ -1,7 +1,7 @@
 import unittest
 import os
 import requests
-import BeautifulSoup
+from bs4 import BeautifulSoup
 
 
 class FlaskTests(unittest.TestCase):
@@ -27,10 +27,10 @@ class FlaskTests(unittest.TestCase):
 
         responce = requests.post('http://localhost:5000/predict', data=params)
         self.assertEqual(responce.status_code, 200)
-        result = requests.get('http://localhost:5000/result')
-        reponse_page = BeautifulSoup(result.data, 'html.parser')
-        positive_rep = reponse_page.find(id_='reponse')
-        self.assertEqual(str(positive_rep), '<span class="text-center" id="reponse">' + self.sentiment_positive.encode() + '</span>')
+        result = requests.get('http://localhost:5000/predict').text
+        reponse_positive = BeautifulSoup(responce.content, 'html.parser')
+        positive_rep = reponse_positive.find(class_="text-center")
+        self.assertEqual(str(positive_rep), '<span class="text-center" id="reponse">The sentiment of your text is Positive</span>')
 
     def test_get_sentiment_negative(self):
         params = {
@@ -40,17 +40,25 @@ class FlaskTests(unittest.TestCase):
 
         responce = requests.post('http://localhost:5000/predict', data=params)
         self.assertEqual(responce.status_code, 200)
-        self.assertEqual(responce.content, self.sentiment_negative.encode())
+        result = requests.get('http://localhost:5000/predict').text
+        reponse_negative = BeautifulSoup(responce.content, 'html.parser')
+        negative_rep = reponse_negative.find(class_="text-center")
+        self.assertEqual(str(negative_rep),
+                         '<span class="text-center" id="reponse">The sentiment of your text is Negative</span>')
 
     def test_get_sentiment_neutral(self):
         params = {
-            'message': 'I am walking on the street',
+            'message': 'Trump lose the election',
             'message_user': "analyze_message",
         }
 
         responce = requests.post('http://localhost:5000/predict', data=params)
         self.assertEqual(responce.status_code, 200)
-        self.assertEqual(responce.content, self.sentiment_neutral.encode())
+        result = requests.get('http://localhost:5000/predict').text
+        reponse_neutral = BeautifulSoup(responce.content, 'html.parser')
+        neutral_rep = reponse_neutral.find(class_="text-center")
+        self.assertEqual(str(neutral_rep),
+                         '<span class="text-center" id="reponse">The sentiment of your text is ' + self.sentiment_neutral + '</span>')
 
 
 if __name__ == '__main__':
