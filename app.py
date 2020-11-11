@@ -38,13 +38,21 @@ def remove_noise(tweet_tokens, stop_words=()):
 def get_sentiment(message):
     status = "fail"
     responce = ""
+    emoji = ""
     message = remove_noise(word_tokenize(message))
     responce = model.classify(dict([token, True] for token in message))
 
     if responce is not '':
         status = "success"
 
-    return status, responce
+        if responce == 'Positive':
+            emoji = "&#128513;"
+        elif responce == 'Negative':
+            emoji = "&#128577;"
+        else:
+            emoji = "&#128528;"
+
+    return status, responce, emoji
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -60,11 +68,11 @@ def predict():
     if request.method == 'POST':
         text = request.form
         if text['message_user'] == 'analyze_message' and text['message'] is not '':
-            status, prediction = get_sentiment(text['message'])
+            status, prediction, emojis = get_sentiment(text['message'])
 
             if status is 'success':
                 return render_template('result.html',
-                                       sentiment_responce="The sentiment of your text is {}".format(prediction))
+                                       sentiment_responce="The sentiment of your text is {}".format(prediction), emoji = emojis)
             else:
                 return render_template('index.html', error="We didn't succeed to analyze your text, please try again.")
 
