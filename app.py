@@ -46,11 +46,11 @@ def get_sentiment(message):
         status = "success"
 
         if responce == 'Positive':
-            emoji = "&amp;#128513;"
+            emoji = "😁"
         elif responce == 'Negative':
-            emoji = "&amp;#128577;"
+            emoji = "🙁"
         else:
-            emoji = "&amp;#128528;"
+            emoji = "😐"
 
     return status, responce, emoji
 
@@ -72,7 +72,7 @@ def predict():
 
             if status is 'success':
                 return render_template('result.html',
-                                       sentiment_responce="The sentiment of your text is {}".format(prediction), emoji = emojis)
+                                       sentiment_responce="The sentiment of your text is {}".format(prediction), emoji = str(emojis))
             else:
                 return render_template('index.html', error="We didn't succeed to analyze your text, please try again.")
 
