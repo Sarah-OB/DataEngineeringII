@@ -46,11 +46,11 @@ def get_sentiment(message):
         status = "success"
 
         if responce == 'Positive':
-            emoji = "&#128513;"
+            emoji = "#128513;"
         elif responce == 'Negative':
-            emoji = "&#128577;"
+            emoji = "#128577;"
         else:
-            emoji = "&#128528;"
+            emoji = "#128528;"
 
     return status, responce, emoji
 
