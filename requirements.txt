@@ -1,0 +1,6 @@
+python
+flask
+re
+string
+nltk
+pickle
