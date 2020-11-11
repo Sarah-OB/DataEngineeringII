@@ -10,6 +10,10 @@ class FlaskTests(unittest.TestCase):
         self.sentiment_positive = "Positive"
         self.sentiment_negative = "Negative"
         self.sentiment_neutral = "Neutral"
+
+        self.emoji_positive = "😁"
+        self.emoji_negative = "🙁"
+        self.emoji_neutral = "😐"
         pass
 
     def tearDown(self):
@@ -29,7 +33,7 @@ class FlaskTests(unittest.TestCase):
             'message_user': "analyze_message",
         }
 
-        expected = '<span class="text-center" id="reponse">The sentiment of your text is ' + self.sentiment_positive + '</span>'
+        expected = '<h3 class="text-center">The sentiment of your text is ' + self.sentiment_positive + ' <p style="font-size:100px">' + self.emoji_positive +'</p></h3>'
         responce = requests.post('http://localhost:5000/predict', data=params)
         self.assertEqual(responce.status_code, 200)
         result = requests.get('http://localhost:5000/predict').text
@@ -43,7 +47,7 @@ class FlaskTests(unittest.TestCase):
             'message_user': "analyze_message",
         }
 
-        expected = '<span class="text-center" id="reponse">The sentiment of your text is ' + self.sentiment_negative + '</span>'
+        expected = '<h3 class="text-center">The sentiment of your text is ' + self.sentiment_negative + ' <p style="font-size:100px">' + self.emoji_negative +'</p></h3>'
         responce = requests.post('http://localhost:5000/predict', data=params)
         self.assertEqual(responce.status_code, 200)
         result = requests.get('http://localhost:5000/predict').text
@@ -57,7 +61,7 @@ class FlaskTests(unittest.TestCase):
             'message_user': "analyze_message",
         }
 
-        expected = '<span class="text-center" id="reponse">The sentiment of your text is ' + self.sentiment_neutral + '</span>'
+        expected = '<h3 class="text-center">The sentiment of your text is ' + self.sentiment_neutral + ' <p style="font-size:100px">' + self.emoji_neutral +'</p></h3>'
         responce = requests.post('http://localhost:5000/predict', data=params)
         self.assertEqual(responce.status_code, 200)
         result = requests.get('http://localhost:5000/predict').text
