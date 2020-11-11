@@ -2,8 +2,9 @@ import random
 import re
 import string
 import pickle
-
 import pandas as pd
+import nltk
+
 from nltk import NaiveBayesClassifier
 from nltk import classify
 from nltk.corpus import stopwords
@@ -12,10 +13,10 @@ from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 
-#nltk.download('punkt')
-#nltk.download('wordnet')
-#nltk.download('averaged_perceptron_tagger')
-#nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 # Load dataset
 ne = pd.read_csv('TweetsCSV/processedNegative.csv')
@@ -135,5 +136,5 @@ custom_tokens = remove_noise(word_tokenize(custom_tweet))
 print(classifier.classify(dict([token, True] for token in custom_tokens)))
 
 #Serialize the model
-pickle.dump(classifier, open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl','wb'))
-model = pickle.load(open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl', 'rb'))
+pickle.dump(classifier, open('model.pkl','wb'))
+model = pickle.load(open('model.pkl', 'rb'))
