@@ -8,14 +8,17 @@ import string
 
 app = Flask(__name__)
 
-model = pickle.load(open('/model_files/model.pkl', 'rb'))
+model = pickle.load(
+    open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl',
+         'rb'))
 
-def remove_noise(tweet_tokens, stop_words = ()):
+
+def remove_noise(tweet_tokens, stop_words=()):
     cleaned_tokens = []
     for token, tag in pos_tag(tweet_tokens):
-        token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
-                       '(?:%[0-9a-fA-F][0-9a-fA-F]))+','', token)
-        token = re.sub("(@[A-Za-z0-9_]+)","", token)
+        token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|' \
+                       '(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', token)
+        token = re.sub("(@[A-Za-z0-9_]+)", "", token)
 
         if tag.startswith("NN"):
             pos = 'n'
@@ -30,6 +33,7 @@ def remove_noise(tweet_tokens, stop_words = ()):
         if len(token) > 0 and token not in string.punctuation and token.lower() not in stop_words:
             cleaned_tokens.append(token.lower())
     return cleaned_tokens
+
 
 def get_sentiment(message):
     status = "fail"
@@ -47,6 +51,7 @@ def get_sentiment(message):
 def index():
     return render_template('index.html')
 
+
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     status = 'fail'
@@ -58,16 +63,19 @@ def predict():
             status, prediction = get_sentiment(text['message'])
 
             if status is 'success':
-                return render_template('result.html', sentiment_responce = "The sentiment of your text is {}".format(prediction))
+                return render_template('result.html',
+                                       sentiment_responce="The sentiment of your text is {}".format(prediction))
             else:
-                return render_template('index.html', error = "We didn't succeed to analyze your text, please try again.")
+                return render_template('index.html', error="We didn't succeed to analyze your text, please try again.")
 
         else:
-            return render_template('index.html', error = "We can't analyze empty text.")
+            return render_template('index.html', error="We can't analyze empty text.")
+
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
     return render_template('result.html')
+
 
 if __name__ == '__main__':
     app.debug = True
