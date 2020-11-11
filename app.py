@@ -6,6 +6,11 @@ from nltk.stem.wordnet import WordNetLemmatizer
 import re
 import string
 
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
+
 app = Flask(__name__)
 
 model = pickle.load(
