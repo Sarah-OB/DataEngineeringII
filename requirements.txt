@@ -1,7 +1,3 @@
 flask
-re
-string
 nltk
-pickle
 beautifulsoup4
-
