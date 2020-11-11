@@ -110,6 +110,5 @@ custom_tokens = remove_noise(word_tokenize(custom_tweet))
 print(classifier.classify(dict([token, True] for token in custom_tokens)))
 
 #Serialize the model
-pickle.dump(classifier, open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineering/model_files/model.pkl','wb'))
-
-model = pickle.load(open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineering/model_files/model.pkl', 'rb'))
+pickle.dump(classifier, open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl','wb'))
+model = pickle.load(open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl', 'rb'))
