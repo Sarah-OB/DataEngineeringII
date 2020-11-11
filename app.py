@@ -6,10 +6,14 @@ from nltk.stem.wordnet import WordNetLemmatizer
 import re
 import string
 
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
+
 app = Flask(__name__)
 
-model = pickle.load(
-    open('/Users/sarah/OneDrive - Efrei/S9/Data Engineering II/Project/DataEngineeringProject/model_files/model.pkl','rb'))
+model = pickle.load(open('model.pkl','rb'))
 
 
 def remove_noise(tweet_tokens, stop_words=()):
