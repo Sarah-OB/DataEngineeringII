@@ -28,30 +28,10 @@
 			<div class="wrap-contact2">
 				<span class="contact2-form-title">
 						Result of the analyzer
-					</span>
-				<!--<form class="contact2-form validate-form" method='POST' action="/result">
-					<div class="wrap-input2 validate-input" data-validate="Name is required">
-						<input type="hidden" name="form_type" value="view_result"/>
-						<input class="input2" type="text" name="name"/>
-						<span class="focus-input2" data-placeholder="NAME"></span>
-					</div>
-
-					<div class="container-contact2-form-btn">
-						<div class="wrap-contact2-form-btn">
-							<div class="contact2-form-bgbtn"></div>
-							<button class="contact2-form-btn" type="submit">
-								See your result!
-							</button>
-						</div>
-					</div>
-					<div>
-						<span class="contact2-form-header"> {{ sentiment_responce }}</span>
-					</div>
-				</form>-->
-
-				<div>
-					<span class="text-center" id="reponse">{{ sentiment_responce }}</span>
-				</div>
+				</span>
+				<span >
+					<h3 class="text-center">{{ sentiment_responce }} <p style="font-size:100px"> {{ emoji }}</p></h3>
+				</span>
 
 				<form	class="contact2-form" method="POST" action="/">
 					<div class="container-contact2-form-btn">
